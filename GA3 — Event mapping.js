@@ -1,5 +1,5 @@
 function eventMappingAuto() {
-  var sheet = SpreadsheetApp.getActive().getSheetByName("Event mapping");
+  var sheet = SpreadsheetApp.getActive().getSheetByName("GAu — Event mapping");
   var values = sheet.getDataRange().getValues();
   const valuesLength = values.length;
 
