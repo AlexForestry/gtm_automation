@@ -1,4 +1,4 @@
-function emganew() {
+function emganew(){
   var sheet = SpreadsheetApp.getActive().getSheetByName("GA4 — Event mapping");
   var values = sheet.getDataRange().getValues();
   const valuesLength = values.length;
@@ -17,13 +17,13 @@ function emganew() {
     var eventName = values[i][3]; //column D
     var page_type = values[i][4];
     var page_path = values[i][5];
-    var element_inner_text = values[i][6];
-    var element_name = values[i][7];
+    var element_description = values[i][6];
+    var element_type = values[i][7];
     var element_location = values[i][8];
-    var form_name = values[i][9];
-    var input_name = values[i][10];
-    var input_placeholder = values[i][11];
-    var input_type = values[i][12]; //column M
+    var element_location2 = values[i][9];
+    var element_location3 = values[i][10];
+    // var input_placeholder = values[i][11];
+    // var input_type = values[i][12]; //column M
     var tagType = values[i][19];
     var tagGA = values[i][22]; //column W
 
@@ -37,27 +37,27 @@ function emganew() {
     if (page_path !== ""){
       outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "page_path"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + page_path + '"\n}\n]\n},';
     }
-    if (element_inner_text !== ""){
-      outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "element_inner_text"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + element_inner_text + '"\n}\n]\n},';
+    if (element_description !== ""){
+      outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "element_description"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + element_description + '"\n}\n]\n},';
     }
-    if (element_name !== ""){
-      outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "element_name"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + element_name + '"\n}\n]\n},';
+    if (element_type !== ""){
+      outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "element_type"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + element_type + '"\n}\n]\n},';
     }
     if (element_location !== ""){
       outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "element_location"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + element_location + '"\n}\n]\n},';
     }
-    if (form_name !== ""){
-      outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "form_name"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + form_name + '"\n}\n]\n},';
+    if (element_location2 !== ""){
+      outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "element_location2"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + element_location2 + '"\n}\n]\n},';
     }
-    if (input_name !== ""){
-      outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "input_name"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + input_name + '"\n}\n]\n},';
+    if (element_location3 !== ""){
+      outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "element_location3"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + element_location3 + '"\n}\n]\n},';
     }
-    if (input_placeholder !== ""){
+    /*if (input_placeholder !== ""){
       outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "input_placeholder"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + input_placeholder + '"\n}\n]\n},';
     }
     if (input_type !== ""){
       outputTagText += '\n{\n"type": "MAP",\n"map":[\n{\n"type": "TEMPLATE",\n"key": "name",\n"value": "input_type"\n},\n{\n"type": "TEMPLATE",\n"key": "value",\n"value": "' + input_type + '"\n}\n]\n},';
-    }
+    }*/
     outputTagText = outputTagText.slice(0, -1); //to remove last comma
     outputTagText += '\n]\n}\n],\n';
 
@@ -80,6 +80,10 @@ function emganew() {
     //initialization of variables
     var triggerId = (i*2)-1;
     var triggerName = values[i][1]; //column B
+    
+    // delete after using 16.02.2022
+    var triggerName = triggerName.replace("GA4", "GA");
+
     var triggerPageType = values[i][2];
     var triggerCategory = values[i][4]; //column E
     var triggerType = values[i][19];
